@@ -1,0 +1,28 @@
+classDiagram
+    class Customer {
+        +String name
+        +List~Transaction~ purchase_history
+        +bool is_real_flag
+    }
+
+    class FoodItem {
+        +String name
+        +float price
+        +String category
+        +float popularity_rating
+    }
+
+    class Menu {
+        +List~FoodItem~ items
+        +filter_by_category(category) List~FoodItem~
+    }
+
+    class Transaction {
+        +List~FoodItem~ selected_items
+        +float total_cost
+        +compute_total() float
+    }
+
+    Customer "1" --> "0..*" Transaction : has purchase history
+    Menu "1" o-- "0..*" FoodItem : contains
+    Transaction "1" o-- "1..*" FoodItem : includes
